@@ -5,16 +5,16 @@ let computerScore = 0;
 function getComputerChoice(){
     let max = 3;
     let computer_choice = Math.floor(Math.random() * max);
-    
     if(computer_choice == 0){
         computer_choice = "rock";
     }
-    else if(computer_choice == 1){
+    if(computer_choice == 1){
         computer_choice = "paper";
     }
-    else if(computer_choice == 2){
+    if(computer_choice == 2){
         computer_choice = "scissors";
     }
+    return computer_choice;
 }
 
 
@@ -32,8 +32,10 @@ const humanSelection = (getHumanChoice());
 const computerSelection = (getComputerChoice());
 humanSelection.toLowerCase();
 console.log(computerSelection);
+console.log(humanSelection);
 
-    if(humanSelection == "rock" && computerSelection == "scissor"){
+
+    if(humanSelection == "rock" && computerSelection == "scissors"){
         humanScore = humanScore + 1;
     
     }
@@ -47,20 +49,17 @@ console.log(computerSelection);
     else if(humanSelection == computerSelection){
         window.alert("Tie");
     }
-    else if(humanSelection != "rock" || humanSelection != "paper" || humanSelection != "scissors"){
-        window.alert("Please enter valid choice");
-    }
     else{
-        computerScore =  computerScore + 1;
+        computerScore += 1;
     }
 }
+    
 
 function playGame(){
     for(let i = 0; i < 5; ++i){
         round();
     }
-    console.log("human score " +humanScore);
+    console.log("human score " + humanScore);
     console.log("computer score " + computerScore);
 }
 
-console.log(playGame());

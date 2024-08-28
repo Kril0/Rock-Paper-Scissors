@@ -1,65 +1,63 @@
-let humanScore = 0;
-let computerScore = 0;
+document.addEventListener('DOMContentLoaded', function () {
+    let humanScore = 0;
+    let computerScore = 0;
+    let humanChoice;
 
-
-function getComputerChoice(){
-    let max = 3;
-    let computer_choice = Math.floor(Math.random() * max);
-    if(computer_choice == 0){
-        computer_choice = "rock";
+    function getComputerChoice() {
+        let max = 3;
+        let computer_choice = Math.floor(Math.random() * max);
+        return ["rock", "paper", "scissors"][computer_choice];
     }
-    if(computer_choice == 1){
-        computer_choice = "paper";
+
+    function round() {
+        const rock = document.querySelector("#one");
+        const paper = document.querySelector("#two");
+        const scissors = document.querySelector("#three");
+
+        rock.addEventListener("click", function () {
+            humanChoice = "rock";
+            playRound();
+        });
+        
+        paper.addEventListener("click", function () {
+            humanChoice = "paper";
+            playRound();
+        });
+
+        scissors.addEventListener("click", function () {
+            humanChoice = "scissors";
+            playRound();
+        });
+
+        function playRound() {
+            if (humanScore < 5 && computerScore < 5) {
+                const computerSelection = getComputerChoice();
+                console.log(`Computer: ${computerSelection}`);
+                console.log(`Human: ${humanChoice}`);
+
+                if (humanChoice === "rock" && computerSelection === "scissors" ||
+                    humanChoice === "paper" && computerSelection === "rock" ||
+                    humanChoice === "scissors" && computerSelection === "paper") {
+                    humanScore++;
+                } else if (humanChoice !== computerSelection) {
+                    computerScore++;
+                } else {
+                    window.alert("Tie");
+                }
+
+                console.log(`Human score: ${humanScore}`);
+                console.log(`Computer score: ${computerScore}`);
+            }
+        }
     }
-    if(computer_choice == 2){
-        computer_choice = "scissors";
-    }
-    return computer_choice;
-}
 
-
-function getHumanChoice(){
-    let user_input = window.prompt("Type Rock, Paper, or Scissors");
-    return user_input;
-}
+    round();
+});
 
 
 
-
-function round(){
-
-const humanSelection = (getHumanChoice());
-const computerSelection = (getComputerChoice());
-humanSelection.toLowerCase();
-console.log(computerSelection);
-console.log(humanSelection);
-
-
-    if(humanSelection == "rock" && computerSelection == "scissors"){
-        humanScore = humanScore + 1;
     
-    }
-    else if(humanSelection == "paper" && computerSelection == "rock"){
-        humanScore = humanScore + 1;
-    }
-    else if(humanSelection == "scissors" && computerSelection == "paper"){
-        humanScore = humanScore + 1;
 
-    }
-    else if(humanSelection == computerSelection){
-        window.alert("Tie");
-    }
-    else{
-        computerScore += 1;
-    }
-}
+
     
-
-function playGame(){
-    for(let i = 0; i < 5; ++i){
-        round();
-    }
-    console.log("human score " + humanScore);
-    console.log("computer score " + computerScore);
-}
 
